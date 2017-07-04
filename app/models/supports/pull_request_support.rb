@@ -1,36 +1,36 @@
 module Supports
   class PullRequestSupport
-    def initialize user = nil, office_id
-      @user = user
+    def initialize office_id, user = nil
       @office_id = office_id
+      @user = user
     end
 
     def total_pull_requests
-      PullRequest.with_user(@user).of_office(@office_id).count
+      PullRequest.select_with_user_office(@user, @office_id).count
     end
 
     def ready_pulls_size
-      PullRequest.ready.with_user(@user).of_office(@office_id).size
+      PullRequest.ready.select_with_user_office(@user, @office_id).size
     end
 
     def reviewing_pulls_size
-      PullRequest.reviewing.with_user(@user).of_office(@office_id).size
+      PullRequest.reviewing.select_with_user_office(@user, @office_id).size
     end
 
     def commented_pulls_size
-      PullRequest.commented.with_user(@user).of_office(@office_id).size
+      PullRequest.commented.select_with_user_office(@user, @office_id).size
     end
 
     def conflicted_pulls_size
-      PullRequest.conflicted.with_user(@user).of_office(@office_id).size
+      PullRequest.conflicted.select_with_user_office(@user, @office_id).size
     end
 
     def merged_pulls_size
-      PullRequest.merged.with_user(@user).of_office(@office_id).size
+      PullRequest.merged.select_with_user_office(@user, @office_id).size
     end
 
     def closed_pulls_size
-      PullRequest.closed.with_user(@user).of_office(@office_id).size
+      PullRequest.closed.select_with_user_office(@user, @office_id).size
     end
   end
 end

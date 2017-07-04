@@ -21,6 +21,10 @@ class PullRequest < ApplicationRecord
     joins(:user).where("office_id = ?", office_id) if office_id.present?
   end
 
+  scope :select_with_user_office, -> user, office_id do
+    with_user(user).of_office office_id
+  end
+
   private
 
   def send_message_to_chatwork
