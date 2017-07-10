@@ -50,6 +50,7 @@ class Admin::PullRequestsController < ApplicationController
 
   def load_pulls_by_statuses
     params[:status].present? ? params[:status] :
-      params[:status] = Settings.pull_request.default_statuses
+      # params[:status] = Settings.pull_request.default_statuses
+      params[:status] = []
   end
 end

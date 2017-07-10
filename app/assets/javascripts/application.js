@@ -21,7 +21,7 @@ $(document).on('ready', function(){
     $(this).remove();
   });
 
-  $('.pull-status span.ready').on('click', function() {
+  $('body').on('click', '.pull-status span.ready', function() {
     if(confirm('Are you sure?') == false) return false;
     var spanElem = $(this);
     var tdElem = spanElem.parents('.pull-status');
@@ -46,4 +46,25 @@ $(document).on('ready', function(){
       }
     });
   });
+
+  $('body').on('change', '.office-classification', function(){
+    $(this).closest('form').submit();
+  })
+
+  $('body').on('click', '.pull-request-status-label label[role=button]', function(e){
+    // var label_name = $(this).attr('for');
+    // var checkbox = $(this).children('input');
+    // var checkbox_status = checkbox.prop('checked');
+
+    // sessionStorage.setItem('label_name', label_name);
+    // if(checkbox_status) {
+    //   // checkbox.attr('checked', 'checked');
+    //   sessionStorage.setItem('status', 'checked');
+    // } else {
+    //   // checkbox.removeAttr('checked');
+    //   sessionStorage.setItem('status', 'unchecked');
+    // }
+
+    $(this).closest('form').submit();
+  })
 })

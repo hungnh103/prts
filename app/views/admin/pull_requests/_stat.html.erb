@@ -1,0 +1,67 @@
+<div>
+  <div class="row">
+    <span class="amount">
+      Total: <%= number_with_delimiter @support.total_pull_requests, delimiter: "." %>
+    </span>
+  </div>
+</div>
+
+<div class="col-md-12">
+  <div class="row">
+    <%= form_tag admin_pull_requests_path, method: :get, remote: true do %>
+      <div class="col-md-12">
+        <table class="filter-by-office">
+          <tr>
+            <td><%= label_tag :office_id, "Office" %></td>
+            <td>
+              <%= select_tag :office_id, options_for_select(@offices
+                .collect{|office| [office.name, office.id]}, params[:office_id]),
+                include_blank: "All", class: "form-control office-classification" %>
+            </td>
+          </tr>
+        </table>
+      </div>
+
+      <div class="detail-stats pull-request-status-label">
+        <div class="row">
+          <label for="ready" role="button">
+            <%= check_box_tag "status[]", :ready, nil, id: :ready,
+              checked: (params[:status].include? "ready"), class: "test" %>
+            <span class="ready test2">ready: <%= @support.ready_pulls_size %></span>
+          </label>
+
+          <label for="reviewing" role=button>
+            <%= check_box_tag "status[]", :reviewing, nil, id: :reviewing,
+              checked: (params[:status].include? "reviewing"), class: "test" %>
+            <span class="reviewing test2">reviewing: <%= @support.reviewing_pulls_size %></span>
+          </label>
+
+          <label for="commented" role="button">
+            <%= check_box_tag "status[]", :commented, nil, id: :commented,
+              checked: (params[:status].include? "commented"), class: "test" %>
+            <span class="commented test2">commented: <%= @support.commented_pulls_size %></span>
+          </label>
+
+          <label for="conflicted" role="button">
+            <%= check_box_tag "status[]", :conflicted, nil, id: :conflicted,
+              checked: (params[:status].include? "conflicted"), class: "test" %>
+            <span class="conflicted test2">conflicted: <%= @support.conflicted_pulls_size %></span>
+          </label>
+
+          <label for="closed" role="button">
+            <%= check_box_tag "status[]", :closed, nil, id: :closed,
+              checked: (params[:status].include? "closed"), class: "test" %>
+            <span class="closed test2">closed: <%= @support.closed_pulls_size %></span>
+          </label>
+
+          <label for="merged" role="button">
+            <%= check_box_tag "status[]", :merged, nil, id: :merged,
+              checked: (params[:status].include? "merged"), class: "test" %>
+            <span class="merged test2">merged: <%= number_with_delimiter @support
+              .merged_pulls_size, delimiter: "." %></span>
+          </label>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>
